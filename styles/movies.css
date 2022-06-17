@@ -1,0 +1,95 @@
+.movies {
+    display: flex;
+    flex-direction: column;
+    row-gap: 24px;
+}
+
+.movies h2 {
+    font-size: 1.75rem;
+    line-height: 2.125rem;
+    font-weight: 700;
+}
+
+.movies div {
+    height: 640px;
+    overflow: auto;
+    padding-right: 44px;
+}
+
+div::-webkit-scrollbar {
+    width: 0.2rem;
+}
+
+div::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+div::-webkit-scrollbar-thumb {
+    background: var(--primary);
+}
+
+.movies ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.movies li:not(:first-child) {
+    margin-top: 50px;
+}
+
+.movies li {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+
+    position: relative;
+    padding-bottom: 16px;
+    padding-left: 10px;
+
+    width: 265px;
+    height: 150px;
+    border-radius: 8px;
+
+    /* background-image: linear-gradient(180deg, rgba(14, 23, 47, 0.0001) 11.72%, #0e172f 100%), url('/assets/item-background.png'); */
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+}
+
+.movies li span {
+    font-size: 0.875rem;
+    line-height: 1.125;
+    font-weight: 400;
+
+    margin-bottom: 6px;
+}
+
+.movies li strong {
+    font-size: 1rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+}
+
+.movies li button {
+    position: absolute;
+    inset: 0;
+
+    margin: auto;
+    background: transparent;
+
+    width: 36px;
+    height: 36px;
+
+    opacity: 0;
+    transform: translateY(40px);
+
+    transition: all 0.6s;
+}
+
+.movies li:hover button {
+    opacity: 1;
+    transform: translateY(0);
+    cursor: pointer;
+}
