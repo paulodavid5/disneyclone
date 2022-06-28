@@ -74,6 +74,7 @@ function createMovie(movieId) {
         movie.appendChild(createButtonMovie(movieId))
         movie.appendChild(createImageMovie(image, data.title))
 
+
         moviesList.appendChild(movie)
     })
 }
