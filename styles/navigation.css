@@ -1,0 +1,23 @@
+.navigation {
+    position: fixed;
+    top: 0;
+    right: -660px;
+    width: 660px;
+    height: 100%;
+    padding-top: 66px;
+    padding-left: 54px;
+    padding-right: 80px;
+
+    background: #0b2e5b;
+    transition: all 0.6s;
+}
+
+.navigation.active {
+    right: 0;
+}
+
+.navigation h2 {
+    font-size: 1.75rem;
+    line-height: 2.125rem;
+    font-weight: 700;
+}

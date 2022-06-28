@@ -36,14 +36,8 @@
     font-weight: 400;
 
     width: 100%;
-    max-width: 540px;
+    max-width: 800px;
 
-    /* paragraph limit */
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 5;
-    -webkit-box-orient: vertical;
 }
 
 .feature__movie button {
@@ -62,6 +56,7 @@
     border-radius: 8rem;
     background: var(--linear);
     box-shadow: 0px 3px 50px rgba(0, 0, 0, 0.160784);
+    cursor: pointer;
 
     transition: filter 0.6s;
 }

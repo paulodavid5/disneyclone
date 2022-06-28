@@ -30,11 +30,17 @@
     <header>
       <img src="assets/logo.png" alt="Logo disney+">
 
-      <button type="button" class="button__menu">
+      <button type="button" class="button__menu" onclick="changeButtonMenu()">
         <span></span>
         <span></span>
         <span></span>
       </button>
+      <nav class="navigation">
+        <h2>Movies</h2>
+        <ul id="movies">
+
+        </ul>
+      </nav>
     </header>
 
     <main>
@@ -52,16 +58,16 @@
 
         <button type="button">
           <img src="assets/icon-play.png" alt="Icon play">
-          Watch Now
+          Assistir agora
         </button>
       </section>
 
-      <aside class="movies">
+      <!-- <aside class="movies">
         <h2>Movies</h2>
         <div>
           <ul id="movies__list"></ul>
         </div>
-      </aside>
+      </aside> -->
     </main>
   </div>
   <script src="./scripts/index.js"></script>
