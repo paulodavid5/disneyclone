@@ -5,7 +5,7 @@ const BASE_URL_IMG = {
     small: 'https://image.tmdb.org/t/p/w500'
 }
 const movies = []
-
+let movieActive = ''
 const moviesElement = document.getElementById('movies')
 
 
@@ -44,11 +44,29 @@ function setMainMovie(movie) {
 
 }
 
+function changeMovieActiveInLIST(newMovieActive) {
+    const movieActiveCurrent = document.getElementById(movieActive)
+    movieActiveCurrent.classList.remove('active-movie')
+
+    const movieActiveNew = document.getElementById(newMovieActive)
+    movieActiveNew.classList.add('active-movie')
+
+    movieActive = newMovieActive
+}
+
 function changeMainMovie(movieId) {
+
+    changeMovieActiveInLIST(movieId)
+
     const movie = movies.find(movie => movie.id == movieId)
 
-    setMainMovie(movie)
-    changeButtonMenu()
+    if (movie?.id) {
+        setMainMovie(movie)
+        changeButtonMenu()
+    } else {
+        alert('Não foi possivel encontrar o filme')
+    }
+
 }
 
 
@@ -77,6 +95,9 @@ function insertMovieList(movie) {
 
     const movieElement = document.createElement('li')
     movieElement.classList.add('movie')
+
+    movieElement.setAttribute('id', movie.id)
+
     const category = `<span>${movie.category}</span>`
     const title = `<strong>${movie.title}</strong>`
 
@@ -90,15 +111,16 @@ function insertMovieList(movie) {
 
 }
 
+async function getMovieData(movieId) {
+    const isMovieInList = movies.findIndex(movie => movie.id == movieId)
 
-function loadMovies() {
-    const LIST_MOVIES = ['tt12801262', 'tt2096673', 'tt5109280', 'tt7146812', 'tt2948372', 'tt2953959', 'tt3521164']
-
-    LIST_MOVIES.map((movie, index) => {
-        fetch(getUrlMovie(movie)).then(response => response.json()).then(data => {
+    if (isMovieInList == -1) {
+        try {
+            let data = await fetch(getUrlMovie(movieId))
+            data = await data.json()
 
             const movieData = {
-                id: movie,
+                id: movieId,
                 title: data.title,
                 overview: data.overview,
                 vote_average: data.vote_average,
@@ -113,14 +135,61 @@ function loadMovies() {
 
             movies.push(movieData)
 
-            if (index === 0) {
-                setMainMovie(movieData)
-            }
+            return movieData
+        } catch (error) {
+            console.log('Mensagem de erro:', error.message)
+        }
+    }
 
-            insertMovieList(movieData)
 
-        })
+    return null
+}
+
+function loadMovies() {
+    const LIST_MOVIES = ['tt12801262', 'tt2096673']
+
+    LIST_MOVIES.map(async (movie, index) => {
+        const movieData = await getMovieData(movie)
+
+        movies.push(movieData)
+
+
+        insertMovieList(movieData)
+
+        if (index === 0) {
+            setMainMovie(movieData)
+            movieActive = movieData.id
+
+            const movieActiveNew = document.getElementById(movieActive)
+            movieActiveNew.classList.add('active-movie')
+
+        }
     })
 }
+
+const buttonAddMovie = document.getElementById('add__movie');
+
+function formatMovieId(movieId) {
+    if (movieId.includes('https://www.imdb.com/title/')) {
+        const id = movieId.split('/')[4]
+        return id
+    }
+
+    return movieId
+}
+
+buttonAddMovie.addEventListener('submit', async function (event) {
+    event.preventDefault()
+
+    const newMovieId = formatMovieId(event.target['movie'].value)
+    const newMovie = await getMovieData(newMovieId)
+
+    if (newMovie?.id) {
+        insertMovieList(newMovie)
+    }
+
+    event.target['movie'].value = ''
+
+})
 
 loadMovies()

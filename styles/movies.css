@@ -51,6 +51,8 @@
 
 }
 
+
+
 .movie span {
     font-size: 0.875rem;
     line-height: 1.125;
@@ -97,4 +99,13 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.movie.active-movie .movie__image {
+    filter: grayscale(100%);
+    opacity: 0.6;
+}
+
+.movie.active-movie button {
+    display: none;
 }
