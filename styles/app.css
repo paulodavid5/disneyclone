@@ -50,8 +50,16 @@ main {
     }
 }
 
-@media(max-width:768px) {
+@media(max-width:650px) {
     #app {
         padding: 16px;
     }
+
+    .app__image::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(90.18deg, rgba(13, 22, 46, 0.7) 30%, rgba(13, 22, 46, 0.2) 96.69%);
+    }
+
 }
